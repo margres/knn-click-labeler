@@ -53,7 +53,7 @@ def legend_lines():
 # Data files (all relative to one data folder)
 # ============================================================
 IMAGES_SUBDIR = "knn_cutouts"                        # contains <ID>.png
-NEIGHBORS_FILES = ("neighbors_A.json", "neighbors_B_C.json")
+NEIGHBORS_FILES = ("neighbors.json", "neighbors_A.json", "neighbors_B_C.json")  # all found are merged
 SELECTED_FILE = "selected_neighbors.csv"             # output: graded neighbors
 REVIEWED_FILE = "reviewed_queries.csv"               # output: queries marked Done
 QUERIES_FILE = "final_grade.csv"                     # optional query ordering

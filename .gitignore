@@ -12,3 +12,7 @@ __pycache__/
 knn_cutouts/
 *.json
 *.csv
+
+# Bundled example data
+!example_data/neighbors.json
+!example_data/knn_cutouts/

@@ -46,13 +46,14 @@ Put these in one folder (the *data folder*):
 ```
 data_folder/
 ├── knn_cutouts/            # one PNG per object: <ID>.png
-├── neighbors_A.json        # {"<query ID>": ["<neighbor ID>", ...], ...}
-├── neighbors_B_C.json      # same format; merged with the file above
+├── neighbors.json          # {"<query ID>": ["<neighbor ID>", ...], ...}
+├── neighbors_A.json        # same format (optional)
+├── neighbors_B_C.json      # same format (optional); all neighbour files found are merged
 └── final_grade.csv         # optional: sets the query order and the metadata shown
                             # (columns used: ID, final_grade, origin, final_score)
 ```
 
-At least one of the two neighbour JSON files is required. Missing cutouts show up as grey squares.
+At least one of the neighbour JSON files is required. Missing cutouts show up as grey squares.
 The file names are set in `labeler_core.py` (section *Data files*).
 
 ## Output
@@ -73,6 +74,16 @@ pip install -r requirements.txt
 ```
 
 The desktop version also needs Tkinter, which ships with most Python installs. On Linux you may need `sudo apt install python3-tk`; with conda, run `conda install tk`.
+
+## Quick start with the example data
+
+The repo includes `example_data/`: 6 KiDS DR4 query objects, each with its 50 nearest neighbours as PNG cutouts (no grades included).
+
+```bash
+python knn_click_labeler.py --data-dir example_data
+```
+
+or, in JupyterLab, set `DATA_DIR = "example_data"` in `labeler.ipynb`. Your grades are written to `example_data/selected_neighbors.csv`.
 
 ## Usage: desktop app
 
@@ -138,5 +149,6 @@ labeler_core.py          # grade settings, file names, loading/saving, image sca
 knn_click_labeler.py     # Tkinter desktop app
 knn_labeler_jupyter.py   # ipywidgets JupyterLab app
 labeler.ipynb            # example notebook
+example_data/            # small runnable example (cutouts + neighbors.json)
 requirements.txt
 ```
