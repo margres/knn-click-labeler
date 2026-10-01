@@ -1,0 +1,4 @@
+numpy
+Pillow
+# Only needed for the JupyterLab version
+ipywidgets>=8

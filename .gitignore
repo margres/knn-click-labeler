@@ -1,0 +1,14 @@
+# Environments / build output
+.venv/
+build/
+dist/
+*.spec
+pyinstaller.log
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+
+# Data and labeling output (kept local)
+knn_cutouts/
+*.json
+*.csv
