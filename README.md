@@ -10,6 +10,21 @@ It comes in two versions that share the same data files and logic:
 | Desktop app (Tkinter) | `knn_click_labeler.py` | You're working on your own machine (macOS/Linux/Windows) |
 | JupyterLab widget (ipywidgets) | `knn_labeler_jupyter.py` / `labeler.ipynb` | You're in JupyterLab, including on a remote server or cluster |
 
+## How it works
+
+The idea: you start from a set of interesting objects (for example known lens candidates). For each one, a similarity search (k-nearest neighbours in some feature space) has already found the objects that look most like it. This tool lets you go through those neighbours by eye and record which ones are interesting too.
+
+<!-- Screenshots to be added here: main window, a graded grid, the JupyterLab version -->
+
+1. **Load.** You point the tool at a data folder. It reads the neighbour lists (`neighbors*.json`, query ID → ordered list of neighbour IDs) and finds each object's cutout in `knn_cutouts/<ID>.png`. If `final_grade.csv` is present, it sets the query order and adds a short info line (grade, origin) to each query.
+2. **Look at one query at a time.** The screen shows the query cutout large on the left and its neighbours as a grid of tiles on the right, closest neighbour first. Long lists are split into pages (grid size set by *Cols* × *Rows*).
+3. **Adjust the display if needed.** All cutouts use the same linear stretch (vmin/vmax). Untick *Auto* to change it with the sliders, for example to bring out faint features.
+4. **Grade by clicking.** Each click on a tile moves it to the next grade (C → B → A → cleared by default, see [Grading](#grading)). The tile gets a coloured border, so you can see at a glance what you've graded. Tiles you don't click stay ungraded.
+5. **Mark the query Done.** This records the query as reviewed and jumps to the next one you haven't reviewed. With *Hide reviewed* on, finished queries are skipped.
+6. **Results are saved as CSVs.** Every graded neighbour becomes one row in `selected_neighbors.csv` (query, neighbour, grade, time). Finished queries go into `reviewed_queries.csv`. Both are reloaded at start-up, so you can stop at any point and continue later where you left off.
+
+The result is a list of new candidates found through their similarity to known ones, each with a grade you assigned by eye.
+
 ## Grading
 
 Click a tile repeatedly to cycle through the grades:
